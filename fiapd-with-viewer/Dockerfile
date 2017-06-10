@@ -5,8 +5,8 @@ ENV PHP_BRIDGE_DIST_URL https://downloads.sourceforge.net/project/php-java-bridg
 ENV PHP_BRIDGE_FILE php-java-bridge_7.1.3/JavaBridgeTemplate713.war
 ENV PHP_BRIDGE_SHA512 0b1e36c0565d3f1f40bdd760fa98d70fb4f0f8f82a8129daf7f23e4ba3416d12f462c16cd90a2f35916fba9e761a0599d923e04c751cf572ad0c51265a50cbfa
 
-ENV JPGRAPH_DIST_URL http://jpgraph.net/download/download.php
-ENV JPGRAPH_DIST_PARAM p=11
+ENV JPGRAPH_DIST_URL https://fossies.org/linux/www/
+ENV JPGRAPH_VERSION 4.0.2
 ENV JPGRAPH_DIST_MD5 c691085c98cadbeb0a3bbebaca480852
 
 RUN    apk update \
@@ -25,7 +25,7 @@ RUN    apk update \
     && mv ./FIAPStorage2/var/www/* . \
     && rm -rf ./FIAPStorage2 \
     && rm FIAPStorage2.zip \
-    && wget -O jpgraph.tar.gz "${JPGRAPH_DIST_URL}?${JPGRAPH_DIST_PARAM}" \
+    && wget -O jpgraph.tar.gz "${JPGRAPH_DIST_URL}/jpgraph-${JPGRAPH_VERSION}.tar.gz" \
     && echo "${JPGRAPH_DIST_MD5} *jpgraph.tar.gz" | md5sum -c - \
     && tar xz -f jpgraph.tar.gz -C ./WEB-INF/ \
     && mv -f ./WEB-INF/jpgraph*/ ./WEB-INF/jpgraph/ \
