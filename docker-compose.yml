@@ -3,7 +3,7 @@ services:
   fiapd:
     depends_on:
      - fiapd-db
-    image: mouflonjp/fiapd
+    image: mouflonjp/fiapd-with-viewer
     ports:
      - "8080:8080"
      - "8443:8443"
