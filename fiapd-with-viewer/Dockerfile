@@ -11,6 +11,8 @@ ENV JPGRAPH_DIST_MD5 c691085c98cadbeb0a3bbebaca480852
 
 RUN    apk update \
     && apk --no-cache add php5 php5-cgi php5-soap php5-pgsql php5-gd \
+    && ln -s /usr/bin/php-cgi5 /usr/bin/php-cgi \
+    && ln -s /usr/bin/php5 /usr/bin/php \
     && sed -i -e 's/display_errors = Off/display_errors = On/' /etc/php5/php.ini \
     && cd /usr/local/tomcat/webapps/ \
     && wget -O PHPBridge.war "${PHP_BRIDGE_DIST_URL}/${PHP_BRIDGE_FILE}" \
@@ -39,5 +41,5 @@ RUN    apk update \
 COPY changeContext.php /usr/local/tomcat/webapps/PHPBridge
 COPY phpbridge.inc /usr/local/tomcat/webapps/PHPBridge
 
-RUN    php /usr/local/tomcat/webapps/PHPBridge/changeContext.php \
+RUN    /usr/bin/php5 /usr/local/tomcat/webapps/PHPBridge/changeContext.php \
     && rm /usr/local/tomcat/webapps/PHPBridge/changeContext.php
